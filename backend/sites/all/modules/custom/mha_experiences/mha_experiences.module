@@ -1,0 +1,104 @@
+<?php
+// $Id$
+
+/**
+ * Module to handle text, for example text customized for SEO
+ */
+
+function mha_experiences_init() {
+	/* Include text helper functions for individual pages */
+}
+
+
+/**
+ * Implementation of hook menu
+ */
+function mha_experiences_menu() {
+  $items  = array();
+  
+  // Rest api to provide experiences
+  $items['restapi/experiences'] = array(
+      'title' => 'Experiences',
+      'type' => MENU_NORMAL_ITEM,
+      'page callback' => 'mha_experiences_json',
+      'access callback' => true,
+  );
+
+  return $items;
+}
+
+
+/**
+ * Function to provide json of experiences
+ */
+function mha_experiences_json() {
+  // Query for all experiences
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'experiences')
+    ->propertyCondition('status', NODE_PUBLISHED);
+  $result = $query->execute();
+
+  // Get all experiences as nodes
+  if (isset($result['node'])) {
+    $experiences_nids = array_keys($result['node']);
+    $experiences_nodes = entity_load('node', $experiences_nids);
+  }
+
+  // Loop nodes and store relevant info
+  $experiences = array();
+  foreach($experiences_nodes as $experience_node) {
+    $experiences[$experience_node->nid] = _mha_experiences_extract_info($experience_node);
+  }
+
+  drupal_json_output(json_encode($experiences));
+}
+
+
+/**
+ * Function to extract info from experience node
+ */
+function _mha_experiences_extract_info($node) {
+  $experiences = array();
+  
+  $experiences['title']         = $node->title;
+  $experiences['description']   = trim($node->body[LANGUAGE_NONE][0]['safe_value']);
+  $experiences['start_date']    = trim($node->field_date[LANGUAGE_NONE][0]['value']);
+  $experiences['end_date']      = trim($node->field_date[LANGUAGE_NONE][0]['value2']);
+  $experiences['tools']         = _mha_experiences_extract_tools($node);
+  $experiences['types']         = _mha_experiences_extract_types($node);
+
+  return $experiences;
+}
+
+
+/**
+ * Function to extract all tools used in experience
+ */
+function _mha_experiences_extract_tools($node) {
+  $tools = array();
+
+  // Loop all tool taxonomy terms and store info
+  foreach($node->field_tools[LANGUAGE_NONE] as $tool) {
+    $term = taxonomy_term_load($tool['tid']);
+    $tools[$tool['tid']] = $term->name;
+  } 
+
+  return $tools;
+}
+
+
+/**
+ * Function to extract type/types of experience
+ */
+function _mha_experiences_extract_types($node) {
+  $types = array();
+
+  // Loop all tool taxonomy terms and store info
+  foreach($node->field_experience_type[LANGUAGE_NONE] as $type) {
+    $term = taxonomy_term_load($type['tid']);
+    $types[$type['tid']] = $term->name;
+  } 
+
+  return $types;
+}

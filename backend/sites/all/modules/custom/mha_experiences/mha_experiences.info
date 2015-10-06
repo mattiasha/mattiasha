@@ -1,0 +1,5 @@
+; $Id$
+name = mha_rest
+description = Module to provide rest interface mattiasha experiences 
+package = mha
+core = 7.x

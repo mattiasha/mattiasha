@@ -1,0 +1,7 @@
+<div ng-hide="isHidden">
+  Name: <input type="text" ng-model="filtername.name" />
+</div>
+<ul>
+  <li ng-repeat="person in people | filter:filtername | orderBy:'name'">{{ person.name}} {{person.adress}}</li>
+</ul>
+<a href='#/orders'>orders</a>

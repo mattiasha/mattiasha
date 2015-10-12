@@ -10,7 +10,7 @@
 					{{commercial.start_date}} - {{commercial.end_date}}
 					{{commercial.description}}
 					<ul>
-						<li ng-repeat="(index,tool) in commercial.tools" class='toolTag'>{{tool}}</li>
+						<li ng-repeat="(index,tool) in commercial.tools" class='label label-default'>{{tool}}</li>
 					</ul>
 				</li>
 		</ul>
@@ -19,7 +19,11 @@
 	<div id="projectsWrapper" ng-hide="!haveCourses">
 		<h2>Courses</h2>
 		<ul >
-				<li ng-repeat="course in courses">{{course.title}}</li>
+				<li ng-repeat="course in courses">{{course.title}}
+					<ul>
+						<li ng-repeat="(index,tool) in course.tools" class='label label-default'>{{tool}}</li>
+					</ul>
+				</li>
 		</ul>
 	</div>
 

@@ -1,15 +1,49 @@
 <br /><br />
-<h1>These are my experiences</h1>
-<div>
-  test {{exp1}}
-  <p>test2 {{myIp}}</p>
-  HELLO
-  <table>
-    <tr ng-repeat="user in users">
-      <td></td>
-      <td><a ng-href="#/users/">{{user.id}}</a></td>
-      <td></td>
-    </tr>
-  </table>
+<div id="experiencesWrapper">
+	<h1>Experiences</h1>
+
+	<div id="projectsWrapper" ng-hide="!haveCommercials">
+		<h2>Commercial</h2>
+		<ul >
+				<li ng-repeat="commercial in commercials">
+					<em>{{commercial.title}}</em><br /><br />
+					{{commercial.start_date}} - {{commercial.end_date}}
+					{{commercial.description}}
+					<ul>
+						<li ng-repeat="(index,tool) in commercial.tools" class='toolTag'>{{tool}}</li>
+					</ul>
+				</li>
+		</ul>
+	</div>
+
+	<div id="projectsWrapper" ng-hide="!haveCourses">
+		<h2>Courses</h2>
+		<ul >
+				<li ng-repeat="course in courses">{{course.title}}</li>
+		</ul>
+	</div>
+
+	<div id="projectsWrapper" ng-hide="!haveProjects">
+		<h2>Projects</h2>
+		<ul>
+				<li ng-repeat="project in projects">{{project.title}}</li>
+		</ul>
+	</div>
+
+	<div id="projectsWrapper" ng-hide="!haveAwards">
+		<h2>Awards</h2>
+		<ul >
+				<li ng-repeat="award in awards">{{award.title}}</li>
+		</ul>
+	</div>
+
+	<div id="projectsWrapper" ng-hide="!haveEducations">
+		<h2>Education</h2>
+		<ul >
+				<li ng-repeat="education in educations">{{education.title}}</li>
+		</ul>
+	</div>
 </div>
+
+
 

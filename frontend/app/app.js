@@ -1,5 +1,5 @@
 (function() {
-	app = angular.module('mattiashaApp', ['ngRoute', 'ngResource', 'ui.bootstrap']);
+	app = angular.module('mattiashaApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'experienceDateFilter']);
 
 	app.config(function($routeProvider) {
 		// Routes

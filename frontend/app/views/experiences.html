@@ -7,7 +7,7 @@
 		<ul >
 				<li ng-repeat="commercial in commercials">
 					<em>{{commercial.title}}</em><br /><br />
-					{{commercial.start_date}} - {{commercial.end_date}}
+					{{commercial.start_date | experienceDate}} - {{commercial.end_date | experienceDate}}
 					{{commercial.description}}
 					<ul>
 						<li ng-repeat="(index,tool) in commercial.tools" class='label label-default'>{{tool}}</li>

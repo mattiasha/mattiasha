@@ -3,17 +3,33 @@
 	<h1>Experiences</h1>
 
 	<div id="projectsWrapper" ng-hide="!haveCommercials">
-		<h2>Commercial</h2>
-		<ul >
-				<li ng-repeat="commercial in commercials">
-					<em>{{commercial.title}}</em><br /><br />
-					{{commercial.start_date | experienceDate}} - {{commercial.end_date | experienceDate}}
-					{{commercial.description}}
-					<ul>
-						<li ng-repeat="(index,tool) in commercial.tools" class='label label-default'>{{tool}}</li>
-					</ul>
-				</li>
-		</ul>
+		<div class="row">
+			<h2>Commercial</h2>
+		</div>
+		<div id="experienceWrapper" ng-repeat="commercial in commercials">
+			<div class="row" >
+				<em>{{commercial.title}}</em><br /><br />
+				<div class="col-sm-2 col-md-3 experienceDate">
+		      {{commercial.start_date | experienceDate}} - {{commercial.end_date | experienceDate}}
+		    </div>
+		    <div class="col-sm-6 col-md-8">
+		      {{commercial.description}}
+		    </div> 
+				<!--
+				<ul>
+	         <li ng-repeat="(index,tool) in commercial.tools" class='label label-default'>
+	         	
+	         </li>
+	      </ul>
+	    	-->
+			<div class="row">
+				<div class="col-xm-12 col-sm-12 col-md-12">
+					<div ng-repeat="(index,tool) in commercial.tools" class='col-sm-2 col-xm-2 col-md-1 label label-default'>
+			      {{tool}}
+		     	</div>
+		   	</div>
+			</div>
+		</div>
 	</div>
 
 	<div id="projectsWrapper" ng-hide="!haveCourses">

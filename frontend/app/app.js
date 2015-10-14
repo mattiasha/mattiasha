@@ -1,5 +1,7 @@
 (function() {
-	app = angular.module('mattiashaApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'experienceDateFilter']);
+	app = angular.module('mattiashaApp', 
+        ['ngRoute', 'ngResource', 'ui.bootstrap', 'experienceDateFilter']);
+        //, 'ngMock'
 
 	app.config(function($routeProvider) {
 		// Routes

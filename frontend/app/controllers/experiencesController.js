@@ -4,15 +4,19 @@
    * The experiences controller function
    */
   var ExperiencesController = function($scope, experiencesFactory) {
-    // Get experiences from backend and store in $scope
-    var experiences = experiencesFactory.getResource().query(storeExperiences);
-
-
+    // experiencesFactory.query(storeExperiences);
+    experiencesFactory.query()
+                      .$promise
+                      .then(function(experiences) {
+                        storeExperiences(experiences);
+                        $scope.afterExperiencesStored = true;
+                      });
+    
     /**
      * Function to get all experiences from backend and store in
      * $scope
      */
-    function storeExperiences() {
+    function storeExperiences(experiences) {
       // Define all type arrays
       $scope.commercials  = [];
       $scope.courses      = [];
@@ -53,8 +57,6 @@
           } 
         }
       });
-
-      console.log("Commercial", $scope.commercials);
     }
   }
 

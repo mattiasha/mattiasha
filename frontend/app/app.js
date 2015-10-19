@@ -1,9 +1,9 @@
 (function() {
 	app = angular.module('mattiashaApp', 
-        ['ngRoute', 'ngResource', 'ui.bootstrap', 'experienceDateFilter']);
-        //, 'ngMock'
+    ['ngRoute', 'ngResource', 'ui.bootstrap', 'experienceDateFilter']);
+    //, 'ngMock'
 
-	app.config(function($routeProvider) {
+	app.config(['$routeProvider', function($routeProvider) {
 		// Routes
 		$routeProvider
 			.when('/',
@@ -25,5 +25,5 @@
 					templateUrl: 'app/views/contact.html'
 				})
 			.otherwise({redirectTo: "/"});
-	});
+	}]);
 }());
